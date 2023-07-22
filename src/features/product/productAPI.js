@@ -58,7 +58,7 @@ export function fetchProductsByFilters(filter, sort, pagination, admin) {
 
   return new Promise(async (resolve) => {
     const response = await fetch(
-      '/products?' + queryString
+      `/products?` + queryString
     );
     const data = await response.json();
     const totalItems = await response.headers.get('X-Total-Count');
@@ -68,7 +68,7 @@ export function fetchProductsByFilters(filter, sort, pagination, admin) {
 
 export function fetchCategories() {
   return new Promise(async (resolve) => {
-    const response = await fetch('/categories');
+    const response = await fetch(`/categories`);
     const data = await response.json();
     resolve({ data });
   });
@@ -76,7 +76,7 @@ export function fetchCategories() {
 
 export function fetchBrands() {
   return new Promise(async (resolve) => {
-    const response = await fetch('/brands');
+    const response = await fetch(`/brands`);
     const data = await response.json();
     resolve({ data });
   });
