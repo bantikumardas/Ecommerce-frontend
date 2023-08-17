@@ -6,7 +6,7 @@ import {
   selectUserInfoStatus,
   selectUserOrders,
 } from '../userSlice';
-import { Grid } from 'react-loader-spinner';
+import { Grid, RotatingLines } from 'react-loader-spinner';
 
 export default function UserOrders() {
   const dispatch = useDispatch();
@@ -113,15 +113,12 @@ export default function UserOrders() {
           </div>
         </div>
       ))}
-       {status === 'loading' ? (
-        <Grid
-          height="80"
-          width="80"
-          color="rgb(79, 70, 229) "
-          ariaLabel="grid-loading"
-          radius="12.5"
-          wrapperStyle={{}}
-          wrapperClass=""
+      {status === 'loading' ? (
+        <RotatingLines
+          strokeColor="grey"
+          strokeWidth="5"
+          animationDuration="0.75"
+          width="96"
           visible={true}
         />
       ) : null}

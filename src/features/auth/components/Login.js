@@ -3,11 +3,14 @@ import { selectError, selectLoggedInUser } from '../authSlice';
 import { Link, Navigate } from 'react-router-dom';
 import { loginUserAsync } from '../authSlice';
 import { useForm } from 'react-hook-form';
+import { Grid, RotatingLines } from 'react-loader-spinner';
+import { useState } from 'react';
 
 export default function Login() {
   const dispatch = useDispatch();
   const error = useSelector(selectError);
   const user = useSelector(selectLoggedInUser);
+  const [whilelogin, setWhileLogin] = useState(false);
   const {
     register,
     handleSubmit,
@@ -34,6 +37,7 @@ export default function Login() {
           <form
             noValidate
             onSubmit={handleSubmit((data) => {
+              setWhileLogin(true)
               dispatch(
                 loginUserAsync({ email: data.email, password: data.password })
               );
@@ -74,14 +78,14 @@ export default function Login() {
                 >
                   Password
                 </label>
-                <div className="text-sm">
+                {/* <div className="text-sm">
                   <Link
-                    to="/signup" //TODO:  to="/forgot-password" but as of now  to="/login"
+                    to="/forgot-password" //TODO:  to="/forgot-password" but as of now  to="/login"
                     className="font-semibold text-indigo-600 hover:text-indigo-500"
                   >
                     Forgot password?
                   </Link>
-                </div>
+                </div> */}
               </div>
               <div className="mt-2">
                 <input
@@ -108,7 +112,17 @@ export default function Login() {
               </button>
             </div>
           </form>
-
+          {user == null && whilelogin && error==null ?
+            (
+              <RotatingLines
+                strokeColor="grey"
+                strokeWidth="5"
+                animationDuration="0.75"
+                width="96"
+                visible={true}
+              />
+            ) : null
+          }
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{' '}
             <Link

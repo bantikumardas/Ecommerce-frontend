@@ -15,7 +15,7 @@ import {
   selectStatus,
 } from '../features/order/orderSlice';
 import { selectUserInfo } from '../features/user/userSlice';
-import { Grid } from 'react-loader-spinner';
+import { Grid, RotatingLines } from 'react-loader-spinner';
 import { useAlert } from 'react-alert';
 
 function Checkout() {
@@ -31,7 +31,7 @@ function Checkout() {
   const items = useSelector(selectItems);
   const status = useSelector(selectStatus);
   const currentOrder = useSelector(selectCurrentOrder);
-  
+
 
   const totalAmount = items.reduce(
     (amount, item) => item.product.discountPrice * item.quantity + amount,
@@ -57,14 +57,14 @@ function Checkout() {
 
   const handlePayment = (e) => {
     console.log(e.target.value);
-    if(e.target.value=='card'){
+    if (e.target.value == 'card') {
       alert.info("online payment is comming soon");
     }
     setPaymentMethod(e.target.value);
   };
 
   const handleOrder = (e) => {
-    if (selectedAddress && paymentMethod=='cash') {
+    if (selectedAddress && paymentMethod == 'cash') {
       const order = {
         items,
         totalAmount,
@@ -94,14 +94,11 @@ function Checkout() {
       {currentOrder && currentOrder.paymentMethod === 'card'}
 
       {status === 'loading' ? (
-        <Grid
-          height="80"
-          width="80"
-          color="rgb(79, 70, 229) "
-          ariaLabel="grid-loading"
-          radius="12.5"
-          wrapperStyle={{}}
-          wrapperClass=""
+        <RotatingLines
+          strokeColor="grey"
+          strokeWidth="5"
+          animationDuration="0.75"
+          width="96"
           visible={true}
         />
       ) : <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -431,7 +428,7 @@ function Checkout() {
                                 </a>
                               </h3>
                               <p className="ml-4">
-                              ₹{item.product.discountPrice}
+                                ₹{item.product.discountPrice}
                               </p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">

@@ -8,8 +8,8 @@ function Home() {
         <div>
             <NavBar>
                 <ProductList></ProductList>
+                <Footer></Footer>
             </NavBar>
-            <Footer></Footer>
         </div>
      );
 }

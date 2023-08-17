@@ -9,7 +9,7 @@ import {
 } from './cartSlice';
 import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import { Grid } from 'react-loader-spinner';
+import { Grid, RotatingLines } from 'react-loader-spinner';
 import Modal from '../common/Modal';
 
 export default function Cart() {
@@ -27,7 +27,7 @@ export default function Cart() {
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
   const handleQuantity = (e, item) => {
-    dispatch(updateCartAsync({id:item.id, quantity: +e.target.value }));
+    dispatch(updateCartAsync({ id: item.id, quantity: +e.target.value }));
   };
 
   const handleRemove = (e, id) => {
@@ -46,14 +46,11 @@ export default function Cart() {
             </h1>
             <div className="flow-root">
               {status === 'loading' ? (
-                <Grid
-                  height="80"
-                  width="80"
-                  color="rgb(79, 70, 229) "
-                  ariaLabel="grid-loading"
-                  radius="12.5"
-                  wrapperStyle={{}}
-                  wrapperClass=""
+                <RotatingLines
+                  strokeColor="grey"
+                  strokeWidth="5"
+                  animationDuration="0.75"
+                  width="96"
                   visible={true}
                 />
               ) : null}
@@ -107,11 +104,11 @@ export default function Cart() {
                             dangerOption="Delete"
                             cancelOption="Cancel"
                             dangerAction={(e) => handleRemove(e, item.id)}
-                            cancelAction={()=>setOpenModal(null)}
+                            cancelAction={() => setOpenModal(null)}
                             showModal={openModal === item.id}
                           ></Modal>
                           <button
-                            onClick={e=>{setOpenModal(item.id)}}
+                            onClick={e => { setOpenModal(item.id) }}
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                           >

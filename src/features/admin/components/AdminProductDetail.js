@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 import { addToCartAsync, selectItems } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/authSlice';
 import { useAlert } from 'react-alert';
-import { Grid } from 'react-loader-spinner';
+import { Grid, RotatingLines } from 'react-loader-spinner';
 
 
 function classNames(...classes) {
@@ -57,14 +57,11 @@ export default function AdminProductDetail() {
   return (
     <div className="bg-white">
       {status === 'loading' ? (
-        <Grid
-          height="80"
-          width="80"
-          color="rgb(79, 70, 229) "
-          ariaLabel="grid-loading"
-          radius="12.5"
-          wrapperStyle={{}}
-          wrapperClass=""
+        <RotatingLines
+          strokeColor="grey"
+          strokeWidth="5"
+          animationDuration="0.75"
+          width="96"
           visible={true}
         />
       ) : null}
@@ -153,10 +150,10 @@ export default function AdminProductDetail() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-xl line-through tracking-tight text-gray-900">
-              ₹{product.price}
+                ₹{product.price}
               </p>
               <p className="text-3xl tracking-tight text-gray-900">
-              ₹{product.discountPrice}
+                ₹{product.discountPrice}
               </p>
 
               {/* Reviews */}

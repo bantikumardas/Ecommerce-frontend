@@ -23,7 +23,6 @@ import UserOrdersPage from './pages/UserOrdersPage';
 import UserProfilePage from './pages/UserProfilePage';
 import { fetchLoggedInUserAsync } from './features/user/userSlice';
 import Logout from './features/auth/components/Logout';
-import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ProtectedAdmin from './features/auth/components/ProtectedAdmin';
 import AdminHome from './pages/AdminHome';
 import AdminProductDetailPage from './pages/AdminProductDetailPage';
@@ -31,7 +30,6 @@ import AdminProductFormPage from './pages/AdminProductFormPage';
 import AdminOrdersPage from './pages/AdminOrdersPage';
 import { positions, Provider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
-import ResetPasswordPage from './pages/ResetPasswordPage';
 
 const options = {
   timeout: 5000,
@@ -146,14 +144,6 @@ const router = createBrowserRouter([
   {
     path: '/logout',
     element: <Logout></Logout>,
-  },
-  {
-    path: '/forgot-password',
-    element: <ForgotPasswordPage></ForgotPasswordPage>,
-  },
-  {
-    path: '/reset-password',
-    element: <ResetPasswordPage></ResetPasswordPage>,
   },
   {
     path: '*',
